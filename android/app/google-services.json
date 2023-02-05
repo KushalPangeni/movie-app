@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216855188350",
+    "project_id": "login-signup-dc474",
+    "storage_bucket": "login-signup-dc474.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216855188350:android:a79d647615f945a333192f",
+        "android_client_info": {
+          "package_name": "com.example.task_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216855188350-fvvoj7ooam57engen0msadbkg7msr097.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDUel5owaKCfTlpN9e7BAknGCAsqSUs-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216855188350-fvvoj7ooam57engen0msadbkg7msr097.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
