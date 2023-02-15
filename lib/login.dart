@@ -3,7 +3,7 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:task_1/homepage.dart';
+import 'package:task_1/homepage1.dart';
 import 'package:task_1/reusable_widgets/reusable_widget.dart';
 import 'package:task_1/signup.dart';
 
@@ -55,7 +55,8 @@ class _LoginState extends State<Login> {
                       TextSpan(
                           text: 'Now',
                           style: TextStyle(
-                              color: Colors.red,
+                              // color: Colors.red,
+                              color: Color.fromARGB(255, 50, 58, 58),
                               fontWeight: FontWeight.bold,
                               fontSize: 25))
                     ],
@@ -90,12 +91,18 @@ class _LoginState extends State<Login> {
                         .signInWithEmailAndPassword(
                             email: email.text, password: password.text)
                         .then((value) {
+                      // FirebaseFirestore.instance
+                      //     .collection('User Data')
+                      //     .doc(value.user!.uid)
+                      //     .set({
+                      //   'email': value.user!.email,
+                      //   'id': value.user!.uid,
+                      // });
                       log('logged In');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => HomePage(
-                              email: email.text, password: password.text)),
+                          builder: ((context) => const HomePage1()),
                         ),
                       );
                     }).onError((error, stackTrace) {
@@ -106,7 +113,7 @@ class _LoginState extends State<Login> {
                     height: 40,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Color.fromARGB(255, 50, 58, 58),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
@@ -121,22 +128,6 @@ class _LoginState extends State<Login> {
                   ),
                 ),
 
-                //sign-up
-                // RichText(
-                //   text: const TextSpan(
-                //     children: [
-                //       TextSpan(
-                //         text: 'New on our platform ',
-                //         style: TextStyle(
-                //             color: Color.fromARGB(255, 58, 62, 62), fontSize: 15),
-                //       ),
-                //       TextSpan(
-                //         text: 'Create an new account',
-                //         style: TextStyle(color: Colors.red, fontSize: 15),
-                //       )
-                //     ],
-                //   ),
-                // ),
                 SizedBox(
                   height: 50,
                 ),

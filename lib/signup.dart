@@ -2,9 +2,10 @@
 
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:task_1/homepage.dart';
+import 'package:task_1/homepage1.dart';
 import 'package:task_1/reusable_widgets/reusable_widget.dart';
 
 class Signup extends StatefulWidget {
@@ -48,7 +49,8 @@ class _SignupState extends State<Signup> {
                       TextSpan(
                           text: 'Registration!',
                           style: TextStyle(
-                              color: Colors.red,
+                              // color: Colors.red,
+                              color: Color.fromARGB(255, 50, 58, 58),
                               fontWeight: FontWeight.bold,
                               fontSize: 25))
                     ],
@@ -130,13 +132,21 @@ class _SignupState extends State<Signup> {
                         .createUserWithEmailAndPassword(
                             email: email.text, password: password.text)
                         .then((value) {
+                      FirebaseFirestore.instance
+                          .collection('User Data')
+                          .doc(value.user!.uid)
+                          .set({
+                        'email': value.user!.email,
+                        'id': value.user!.uid
+                      });
                       log('Signed Up');
                       return Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: ((context) {
-                            return HomePage(
-                                email: email.text, password: password.text);
+                            return HomePage1();
+                            // HomePage(
+                            //     email: email.text, password: password.text);
                           }),
                         ),
                       );
@@ -146,7 +156,9 @@ class _SignupState extends State<Signup> {
                     height: 40,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      // color: Colors.red,
+                      color: Color.fromARGB(255, 50, 58, 58),
+
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
@@ -172,13 +184,6 @@ class _SignupState extends State<Signup> {
                     InkWell(
                       onTap: (() {
                         Navigator.pop(context);
-                        // Navigator.
-                        // push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: ((context) => Login()),
-                        //   ),
-                        // );
                       }),
                       child: Text(
                         'Login',
