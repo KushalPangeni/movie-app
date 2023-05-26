@@ -2,6 +2,7 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 TextFormField forpassword(String labeltext, TextEditingController controller) {
   return TextFormField(
@@ -40,4 +41,20 @@ TextFormField foremail(String labeltext, TextEditingController controller) {
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
     ),
   );
+}
+
+void setLoginData(String email, String password) async {
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  sharedPreferences.setString("email", email);
+  sharedPreferences.setString("password", password);
+}
+
+Future getLoginData() async {
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  final String? email;
+  email = sharedPreferences.getString('email');
+  sharedPreferences.getString('password');
+  return email ?? "Null data";
 }

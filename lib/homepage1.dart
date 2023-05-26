@@ -2,10 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:task_1/login.dart';
 import 'package:task_1/screen.dart';
 
 class HomePage1 extends StatefulWidget {
-  const HomePage1({super.key});
+  const HomePage1({
+    super.key,
+  });
 
   @override
   State<HomePage1> createState() => _HomePage1State();
@@ -16,6 +20,31 @@ class _HomePage1State extends State<HomePage1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Container(
+          color: Colors.teal[50],
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: Text("Kushal Pangeni"),
+                accountEmail: Text("kushal@gmail.com"),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                  onPressed: (() async {
+                    final SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    sharedPreferences.remove("email");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => Login())));
+                  }),
+                  child: Text("Logout"))
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

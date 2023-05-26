@@ -91,14 +91,8 @@ class _LoginState extends State<Login> {
                         .signInWithEmailAndPassword(
                             email: email.text, password: password.text)
                         .then((value) {
-                      // FirebaseFirestore.instance
-                      //     .collection('User Data')
-                      //     .doc(value.user!.uid)
-                      //     .set({
-                      //   'email': value.user!.email,
-                      //   'id': value.user!.uid,
-                      // });
                       log('logged In');
+                      setLoginData(email.text, password.text);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

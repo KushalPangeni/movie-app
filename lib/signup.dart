@@ -140,6 +140,8 @@ class _SignupState extends State<Signup> {
                         'id': value.user!.uid
                       });
                       log('Signed Up');
+                      setLoginData(email.text, password.text);
+
                       return Navigator.push(
                         context,
                         MaterialPageRoute(

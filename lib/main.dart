@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:task_1/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'homepage1.dart';
+import 'login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,18 +27,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    getid();
-    super.initState();
-  }
-
+  String? finalEmail;
   getid() async {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user != null) {
         id = user.uid;
       }
     });
+  }
+
+  @override
+  void initState() {
+    // getValidation().whenComplete(() async {
+    // Timer(
+    //   const Duration(seconds: 2),
+    //   () => Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: ((context) =>
+    //           finalEmail == null ? const Login() : const HomePage1()),
+    //     ),
+    //   ),
+    // );
+    // });
+    getValidation();
+    super.initState();
+  }
+
+  Future getValidation() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    finalEmail = sharedPreferences.getString('email');
+    log(finalEmail.toString());
+    setState(() {});
   }
 
   @override
@@ -48,7 +74,7 @@ class _MyAppState extends State<MyApp> {
               statusBarIconBrightness: Brightness.dark),
         ),
       ),
-      home: const Login(),
+      home: finalEmail == null ? const Login() : const HomePage1(),
     );
   }
 }
